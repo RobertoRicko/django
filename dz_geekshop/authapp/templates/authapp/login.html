@@ -1,0 +1,9 @@
+{% extends 'mainapp/base.html' %}
+{% block content %}
+    <form class = "form-horizontal" method="POST">
+        {% csrf_token %}
+        <input name="username" type="text", placeholder="Введите ваш логин">
+        <input name="password"type="password", placeholder="Введите ваш пароль">
+        <input type="submit", value="Войти">
+    </form>
+{% endblock %}
