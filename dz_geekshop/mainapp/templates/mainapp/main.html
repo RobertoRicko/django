@@ -4,13 +4,14 @@
 {% endblock %}
 
 {% block content%}
-    <h1 class='test'>Главная</h1>
+    <h1 class>Главная</h1>
     {% if request.user.is_authenticated %}
-        <div style="font-size:20px">Добро пожаловать, {{request.user.username | title}}</div>
+        <div class = "divtext">Добро пожаловать, {{request.user.username | title}}</div>
         <a href="{% url 'auth:logout'%}">Выйти</a>
     {% else %}
-        <div style="font-size:20px">Добро пожаловать, {{guest_name}}</div>
+        <div class = "divtext">Добро пожаловать <br>
         <a href="{% url 'auth:login'%}">Войти</a>
         <a href="{% url 'auth:register'%}">Зарегистрироваться</a>
+        </div>
     {% endif %}
 {% endblock %}
