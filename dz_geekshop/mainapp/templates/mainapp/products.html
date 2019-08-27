@@ -4,9 +4,18 @@
 {% endblock %}
 
 {% block content%}
-    <h1 class='test'>Продукты</h1>
+    <h1>Продукты</h1>
+    {% include 'mainapp/includes/inc_category.html' %}
     {% for product in products%}
-        <div>{{product.name}}</div>
-        <img src="http://127.0.0.1:8000/media/{{product.image}}" alt="Изображение продукта">
+        <div class ="form-control" style="width:20%">
+            <div>Количество продуктов в корзине: {{ basket|length }}</div>
+            <div class = divtext>{{product.name}}</div>
+            <img style= "width:50%"src="http://127.0.0.1:8000/media/{{product.image}}" alt="Изображение продукта">
+            <p style="text-align:left; font-size: 13px">{{product.short_desc}}</p>
+            <a href="{% url 'basket:add' product.pk %}" style="font-size: 12px">Добавить в корзину</a>
+            <br>
+            <a href="{% url 'basket:remove' product.pk %}" style="font-size: 12px">Удалить из корзины</a>
+            <div style="text-align:right; font-size: 15px">{{product.price}}₽</div>
+        </div>
     {% endfor %}
 {% endblock %}

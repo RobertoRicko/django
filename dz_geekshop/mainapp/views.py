@@ -1,22 +1,17 @@
 from django.shortcuts import render
-import random
-from .models import Product
-productlist = []
-namelist = []
+from .models import Product, ProductCategory
 
 def main(request):
-    with open('nameslist.txt', encoding="UTF-8") as f:
-        if len(namelist) < 1:
-            for object in f:
-                namelist.append(object.strip())
-    context = {'guest_name': namelist[random.randrange(0,4)]}
-    return render(request, 'mainapp/main.html', context)
+    return render(request, 'mainapp/main.html')
 
 
 def contacts(request):
     return render(request, 'mainapp/contacts.html')
 
 
-def products(request):
-    context = {'products': Product.objects.all()}
+def products(request, pk=None):
+    product_list = Product.objects.all()
+    if pk:
+        product_list = product_list.filter(category__pk=pk)
+    context = {'products': product_list, 'categories': ProductCategory.objects.all, 'basket':request.user.basket.all()}
     return render(request, 'mainapp/products.html', context)
